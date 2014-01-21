@@ -26,7 +26,7 @@ module Html2js
     end
 
     def evaluate(scope, locals, &block)
-      filename = file.gsub(root_path, '').gsub(/\.js/, '').gsub(/\.haml/, '.html')
+      filename = file.gsub(root_path, '').gsub(/\.erb/, '').gsub(/\.js/, '').gsub(/\.haml/, '.html')
       <<EOT
 try {
   requirements = angular.module('templates').requires;
