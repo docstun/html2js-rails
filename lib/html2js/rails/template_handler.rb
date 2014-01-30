@@ -1,4 +1,5 @@
 require 'tilt'
+require 'slim'
 require 'sprockets'
 
 module Html2js
@@ -26,7 +27,7 @@ module Html2js
     end
 
     def evaluate(scope, locals, &block)
-      filename = file.gsub(root_path, '').gsub(/\.erb/, '').gsub(/\.js/, '').gsub(/\.haml/, '.html')
+      filename = file.gsub(root_path, '').gsub(/\.erb/, '').gsub(/\.js/, '').gsub(/\.haml/, '').gsub(/\.slim/, '')
       <<EOT
 try {
   requirements = angular.module('templates').requires;
@@ -46,4 +47,5 @@ EOT
 end
 
 Sprockets.register_engine '.haml', Tilt::HamlTemplate
+Sprockets.register_engine '.slim', Slim::Template
 Sprockets.register_engine '.tpl', Html2js::TemplateHandler
